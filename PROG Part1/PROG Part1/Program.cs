@@ -3,30 +3,35 @@ using System.Collections.Generic;
 
 namespace RecipeApp
 {
+    // Represents an ingredient in a recipe
     class Ingredient
     {
-        public string Name { get; set; }
-        public double Quantity { get; set; }
-        public string Unit { get; set; }
-        public double DefaultQuantity { get; set; } // Store default quantity
+        public string Name { get; set; } // Name of the ingredient
+        public double Quantity { get; set; } // Quantity of the ingredient
+        public string Unit { get; set; } // Unit of measurement for the quantity
+        public double DefaultQuantity { get; set; } // Store default quantity for scaling
     }
-    
+
+    // Represents a step in a recipe
     class Step
     {
-        public string Description { get; set; }
+        public string Description { get; set; } // Description of the step
     }
 
+    // Represents a recipe consisting of ingredients and steps
     class Recipe
     {
-        public List<Ingredient> Ingredients { get; set; }
-        public List<Step> Steps { get; set; }
+        public List<Ingredient> Ingredients { get; set; } // List of ingredients in the recipe
+        public List<Step> Steps { get; set; } // List of steps in the recipe
 
+        // Constructor to initialize lists
         public Recipe()
         {
             Ingredients = new List<Ingredient>();
             Steps = new List<Step>();
         }
 
+        // Display the recipe including ingredients and steps
         public void DisplayRecipe()
         {
             Console.WriteLine("\nRecipe:");
@@ -42,6 +47,7 @@ namespace RecipeApp
             }
         }
 
+        // Scale the quantities of ingredients by a given factor
         public void ScaleRecipe(double scaleFactor)
         {
             foreach (Ingredient ingredient in Ingredients)
@@ -50,6 +56,7 @@ namespace RecipeApp
             }
         }
 
+        // Store default quantities of ingredients for scaling
         public void StoreDefaultQuantities()
         {
             foreach (Ingredient ingredient in Ingredients)
@@ -58,6 +65,7 @@ namespace RecipeApp
             }
         }
 
+        // Reset ingredient quantities to their default values
         public void ResetQuantities()
         {
             foreach (Ingredient ingredient in Ingredients)
@@ -71,11 +79,12 @@ namespace RecipeApp
     {
         static void Main(string[] args)
         {
-            Recipe recipe = new Recipe();
-            bool running = true;
+            Recipe recipe = new Recipe(); // Create a new recipe instance
+            bool running = true; // Flag to control program execution
 
             while (running)
             {
+                // Display menu options for user
                 Console.WriteLine("1. Enter recipe details");
                 Console.WriteLine("2. Display recipe");
                 Console.WriteLine("3. Scale recipe");
@@ -83,30 +92,30 @@ namespace RecipeApp
                 Console.WriteLine("5. Clear all data");
                 Console.WriteLine("6. Exit");
 
-                int choice = int.Parse(Console.ReadLine());
+                int choice = int.Parse(Console.ReadLine()); // Get user choice
 
                 switch (choice)
                 {
                     case 1:
-                        EnterRecipeDetails(recipe);
+                        EnterRecipeDetails(recipe); // Call function to enter recipe details
                         break;
                     case 2:
-                        recipe.DisplayRecipe();
+                        recipe.DisplayRecipe(); // Call method to display recipe
                         break;
                     case 3:
                         Console.WriteLine("Enter scaling factor (0.5 for half, 2 for double, 3 for triple):");
                         double scaleFactor = double.Parse(Console.ReadLine());
-                        recipe.ScaleRecipe(scaleFactor);
+                        recipe.ScaleRecipe(scaleFactor); // Call method to scale recipe
                         break;
                     case 4:
-                        recipe.ResetQuantities();
+                        recipe.ResetQuantities(); // Call method to reset quantities
                         break;
                     case 5:
-                        recipe = new Recipe();
+                        recipe = new Recipe(); // Clear all recipe data
                         Console.WriteLine("All data cleared.");
                         break;
                     case 6:
-                        running = false;
+                        running = false; // Exit the program
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Please enter a number between 1 and 6.");
@@ -115,6 +124,7 @@ namespace RecipeApp
             }
         }
 
+        // Function to enter recipe details
         static void EnterRecipeDetails(Recipe recipe)
         {
             Console.WriteLine("Enter the number of ingredients:");
