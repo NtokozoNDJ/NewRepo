@@ -10,7 +10,7 @@ namespace RecipeApp
         public string Unit { get; set; }
         public double DefaultQuantity { get; set; } // Store default quantity
     }
-
+    
     class Step
     {
         public string Description { get; set; }
